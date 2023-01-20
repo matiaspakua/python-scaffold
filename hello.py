@@ -1,5 +1,8 @@
-def add(x,y):
-    return x+y
+"""Adding function."""
 
-result = add(1,2)
-print(f"this is the sum: 1 and 2 is {result}")
+def add(x_operation, y_operator):
+    """Adding function."""
+    return x_operation + y_operator
+
+
+print(f"this is the sum: 1 and 2 is { add(1, 2)}")
