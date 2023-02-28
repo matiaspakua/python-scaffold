@@ -42,7 +42,7 @@ jobs:
       run: |
         pytest
     - name: Wait for MongoDB to start
-        run: |
-          while ! nc -z localhost 27017; do sleep 1; done
-      - name: Run integration tests
-        run: ./gradlew integrationTest
+      run: |
+         while ! nc -z localhost 27017; do sleep 1; done
+    - name: Run integration tests
+      run: ./gradlew integrationTest
