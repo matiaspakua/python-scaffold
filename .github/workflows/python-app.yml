@@ -37,3 +37,10 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
+    - name: Start MongoDB
+      uses: supercharge/mongodb-github-action@1.6.0
+      with:
+        mongodb-version: 4.4
+    - name: Check MongoDB
+      run: |
+        mongo --eval 'db.runCommand({ connectionStatus : 1 })'
