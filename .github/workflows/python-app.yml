@@ -17,6 +17,10 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    container:
+      image: mongo
+      options: --name mongodb -p 27017:27017
+
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
@@ -37,10 +41,8 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
-    - name: Start MongoDB
-      uses: supercharge/mongodb-github-action@1.6.0
-      with:
-        mongodb-version: 4.4
-    - name: Check MongoDB
-      run: |
-        mongo --eval 'db.runCommand({ connectionStatus : 1 })'
+    - name: Wait for MongoDB to start
+        run: |
+          while ! nc -z localhost 27017; do sleep 1; done
+      - name: Run integration tests
+        run: ./gradlew integrationTest
