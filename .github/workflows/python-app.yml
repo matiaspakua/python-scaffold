@@ -21,7 +21,7 @@ jobs:
     steps:
     - name: Wait for MongoDB to start
       run: |
-        do sleep 60; done
+        do sleep 60;
     - name: Run integration tests
       run: ./gradlew integrationTest
     - uses: actions/checkout@v3
