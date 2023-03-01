@@ -21,7 +21,7 @@ jobs:
     steps:
     - name: Wait for MongoDB to start
       run: |
-         while ! nc -z localhost 27017; do sleep 1; done
+        do sleep 60; done
     - name: Run integration tests
       run: ./gradlew integrationTest
     - uses: actions/checkout@v3
