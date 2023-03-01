@@ -14,14 +14,16 @@ permissions:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     container:
       image: mongo
       options: --name mongodb -p 27017:27017
-
     steps:
+    - name: Wait for MongoDB to start
+      run: |
+         while ! nc -z localhost 27017; do sleep 1; done
+    - name: Run integration tests
+      run: ./gradlew integrationTest
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
@@ -41,8 +43,3 @@ jobs:
     - name: Test with pytest
       run: |
         pytest
-    - name: Wait for MongoDB to start
-      run: |
-         while ! nc -z localhost 27017; do sleep 1; done
-    - name: Run integration tests
-      run: ./gradlew integrationTest
