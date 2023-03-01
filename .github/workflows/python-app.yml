@@ -22,8 +22,6 @@ jobs:
     - name: Wait for MongoDB to start
       run: |
         sleep 60;
-    - name: Run integration tests
-      run: ./gradlew integrationTest
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
       uses: actions/setup-python@v3
